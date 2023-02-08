@@ -5,7 +5,8 @@ In this part, we will familiarize ourselves with the React-library, which we wil
 ## Start the application
 
 Enter to any of the subdirectories (course_info, anecdotes, or unicafe)
-...bash
+
+```bash
 $ cd course_info
 $ npm run dev
-...
+```
