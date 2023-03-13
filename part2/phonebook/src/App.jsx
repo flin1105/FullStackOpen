@@ -3,12 +3,15 @@ import Filter from "./Filter";
 import Persons from "./Persons";
 import PersonForm from "./PersonForm";
 import personService from "./services/persons";
+import Notification from "./Notification";
+import "./index.css";
 
 const App = () => {
 	const [persons, setPersons] = useState([]);
 	const [newName, setNewName] = useState("");
 	const [newNumber, setNewNumber] = useState("");
 	const [filterValue, setFilterValue] = useState("");
+	const [notificationMessage, setNotificationMessage] = useState(null);
 
 	useEffect(() => {
 		console.log("Use Effect");
@@ -37,6 +40,10 @@ const App = () => {
 			personService.add(newPerson).then((updatedPersons) => {
 				console.log("updated Persons log", updatedPersons);
 				setPersons(persons.concat(updatedPersons));
+				setNotificationMessage(`Added ${updatedPersons.name}`);
+				setTimeout(() => {
+					setNotificationMessage(null);
+				}, 10000);
 			});
 		} else {
 			alert(`${newName} is already added to phonebook`);
@@ -54,6 +61,7 @@ const App = () => {
 	return (
 		<div>
 			<h2>Phonebook</h2>
+			<Notification message={notificationMessage} />
 			<Filter
 				filterValue={filterValue}
 				onHandleChange={handleFilterChange}
